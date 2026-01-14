@@ -218,7 +218,23 @@
             transform: translate(-50%, -50%);
             z-index: 10;
             padding: 1rem;
-            max-width: 100%;
+            width: 90%;
+            max-width: 28rem;
+        }
+
+        @media (max-width: 640px) {
+            .content-wrapper {
+                width: 95%;
+                padding: 0.5rem;
+                top: 50%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .content-wrapper {
+                width: 98%;
+                padding: 0.25rem;
+            }
         }
 
         .icon-btn {
@@ -394,14 +410,14 @@
     <!-- Contenedor principal -->
     <div class="content-wrapper">
         <!-- Card Container -->
-        <div class="bg-black rounded-3xl shadow-2xl max-w-md w-full p-8 animate-scaleIn">
+        <div class="bg-black rounded-3xl shadow-2xl w-full p-8 sm:p-6 md:p-8 animate-scaleIn">
 
             <!-- Avatar Section -->
-            <div class="flex justify-center mb-6">
+            <div class="flex justify-center mb-4 sm:mb-6">
                 <div class="relative avatar-container">
                     <!-- Red Circle Background with Animation -->
                     <div
-                        class="w-32 h-32 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center animate-float animate-pulse-glow overflow-hidden">
+                        class="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center animate-float animate-pulse-glow overflow-hidden">
                         <!-- Profile Image -->
                         <img src="img/perfil.png" alt="Glogloking Profile" class="profile-img">
                     </div>
@@ -409,7 +425,7 @@
             </div>
 
             <!-- Title -->
-            <h1 class="text-white text-4xl font-bold text-center mb-2 animate-fadeInUp delay-100">
+            <h1 class="text-white text-3xl sm:text-4xl font-bold text-center mb-2 animate-fadeInUp delay-100">
                 Glogloking
             </h1>
 
@@ -422,15 +438,16 @@
             </div>
 
             <!-- Description -->
-            <p class="text-gray-300 text-center mb-8 leading-relaxed animate-fadeInUp delay-200">
-                Soy <strong class="text-white font-semibold">streamer</strong>, <strong class="text-white font-semibold">youtuber</strong> y <strong class="text-red-400">huérfano</strong>. 
+            <p class="text-gray-300 text-center mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed animate-fadeInUp delay-200">
+Soy <strong class="text-white font-semibold">streamer</strong>, <strong class="text-white font-semibold">youtuber</strong> y <strong class="text-red-400">huérfano</strong>. 
                 Egresado de <strong class="text-red-400 font-bold">Ciencias del Fracaso</strong>. 
+
                 Prendo a las <strong class="text-white">6:00 p.m.</strong> <span class="text-gray-400 italic">(según yo)</span>, pero generalmente es <strong class="text-white">2 o 3 horas después</strong>. 
-                Hago <strong class="text-red-400">IRL</strong>, <strong class="text-red-400">setup</strong>, <strong class="text-red-400">podcast</strong>, <strong class="text-red-400">eventos</strong> y el <strong class="text-white">chow</strong> nunca falta, aunque paradójicamente <span class="text-gray-400 italic">nunca doy variedad</span>.
-            </p>
+              
+                Hago <strong class="text-red-400">IRL</strong>, <strong class="text-red-400">setup</strong>, <strong class="text-red-400">podcast</strong>, <strong class="text-red-400">eventos</strong> y el <strong class="text-white">chow</strong> nunca falta, aunque paradójicamente <span class="text-gray-400 italic">nunca doy variedad</span>.            </p>
 
             <!-- Social Media Icons -->
-            <div class="flex flex-wrap justify-center gap-4 animate-fadeInUp delay-300">
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 animate-fadeInUp delay-300">
                 <a href="https://kick.com/elglogloking" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                     <img src="img/icons/svgexport-2.svg" alt="Social Icon" class="w-6 h-6">
                 </a>
