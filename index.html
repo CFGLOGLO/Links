@@ -545,7 +545,7 @@
         </div>
 
         <!-- Control de música -->
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic" loop autoplay>
             <source src="intro.mp3" type="audio/mpeg">
         </audio>
 
@@ -579,20 +579,18 @@
         // Establecer volumen inicial al 3%
         bgMusic.volume = 0.03;
 
-        // Función para iniciar música
+        // Función simple para iniciar música
         function startMusic() {
-            bgMusic.play().then(() => {
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            }).catch(() => {
-                console.log('Autoplay bloqueado. Haz clic en el botón para reproducir.');
+            bgMusic.volume = 0.03;
+            bgMusic.play().catch(() => {
+                console.log('Autoplay bloqueado');
             });
         }
 
-        // Toggle play/pause (simplificado: acciones -> los eventos 'play'/'pause' actualizarán el icono)
+        // Toggle play/pause
         musicToggle.addEventListener('click', () => {
             if (bgMusic.paused) {
-                bgMusic.play().catch(() => {});
+                bgMusic.play();
             } else {
                 bgMusic.pause();
             }
@@ -602,9 +600,6 @@
         volumeSlider.addEventListener('input', (e) => {
             bgMusic.volume = e.target.value / 100;
         });
-
-        // Intentar reproducir automáticamente
-        startMusic();
 
         // Actualizar icono según estado real del audio
         function updateMusicIcon() {
@@ -619,20 +614,15 @@
 
         // Escuchar eventos para mantener icono en sincronía
         bgMusic.addEventListener('play', updateMusicIcon);
-        bgMusic.addEventListener('playing', updateMusicIcon);
         bgMusic.addEventListener('pause', updateMusicIcon);
-        bgMusic.addEventListener('ended', updateMusicIcon);
 
-        // Reintentar reproducción al hacer clic en cualquier parte de la página
-        // Evitar que el clic sobre el control de música vuelva a forzar play (previene doble-clic)
-        document.body.addEventListener('click', (e) => {
-            const clickedInsideMusicControl = e.target.closest && e.target.closest('.music-control');
-            if (bgMusic.paused && !clickedInsideMusicControl) {
-                startMusic();
-            }
-        }, { once: true });
+        // Intentar reproducir inmediatamente y en varios eventos
+        startMusic();
+        document.addEventListener('click', startMusic, { once: true });
+        document.addEventListener('touchstart', startMusic, { once: true });
+        document.addEventListener('keydown', startMusic, { once: true });
 
-        // Forzar icono inicial acorde al estado actual (por si autoplay tuvo éxito)
+        // Inicializar icono
         updateMusicIcon();
 
         // Función para verificar el estado del stream en Kick
