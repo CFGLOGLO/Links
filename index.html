@@ -474,7 +474,7 @@
                     <strong class="text-white font-semibold">youtuber</strong> y
                     <strong class="text-red-400">huérfano</strong>.
                     Egresado de <strong class="text-red-400 font-bold">Ciencias
-                        del Fracaso</strong>.
+                        del Fracaso y Showman de nacimiento</strong>.
 
                     Prendo a las <strong class="text-white">6:00 p.m.</strong>
                     <span class="text-gray-400 italic">(según yo)</span>, pero
@@ -484,9 +484,9 @@
                     Hago <strong class="text-red-400">IRL</strong>, <strong
                         class="text-red-400">setup</strong>, <strong
                         class="text-red-400">podcast</strong>, <strong
-                        class="text-red-400">eventos</strong> y el <strong
-                        class="text-white">chow</strong> nunca falta, aunque
-                    paradójicamente <span class="text-gray-400 italic">nunca doy
+                        class="text-red-400">eventos</strong>, <strong
+                        class="text-red-400">y otros</strong>. Aunque <strong
+                        class="text-white">paradójicamente</strong> <span class="text-gray-400 italic">dicen que nunca doy
                         variedad</span>. </p>
 
                 <!-- Social Media Icons -->
@@ -589,16 +589,12 @@
             });
         }
 
-        // Toggle play/pause
+        // Toggle play/pause (simplificado: acciones -> los eventos 'play'/'pause' actualizarán el icono)
         musicToggle.addEventListener('click', () => {
             if (bgMusic.paused) {
-                bgMusic.play();
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
+                bgMusic.play().catch(() => {});
             } else {
                 bgMusic.pause();
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
             }
         });
 
@@ -610,12 +606,34 @@
         // Intentar reproducir automáticamente
         startMusic();
 
-        // Reintentar reproducción al hacer clic en cualquier parte de la página
-        document.body.addEventListener('click', () => {
+        // Actualizar icono según estado real del audio
+        function updateMusicIcon() {
             if (bgMusic.paused) {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+        }
+
+        // Escuchar eventos para mantener icono en sincronía
+        bgMusic.addEventListener('play', updateMusicIcon);
+        bgMusic.addEventListener('playing', updateMusicIcon);
+        bgMusic.addEventListener('pause', updateMusicIcon);
+        bgMusic.addEventListener('ended', updateMusicIcon);
+
+        // Reintentar reproducción al hacer clic en cualquier parte de la página
+        // Evitar que el clic sobre el control de música vuelva a forzar play (previene doble-clic)
+        document.body.addEventListener('click', (e) => {
+            const clickedInsideMusicControl = e.target.closest && e.target.closest('.music-control');
+            if (bgMusic.paused && !clickedInsideMusicControl) {
                 startMusic();
             }
         }, { once: true });
+
+        // Forzar icono inicial acorde al estado actual (por si autoplay tuvo éxito)
+        updateMusicIcon();
 
         // Función para verificar el estado del stream en Kick
         async function checkStreamStatus() {
