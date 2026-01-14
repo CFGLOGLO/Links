@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElGlogloking</title>
-    <link rel="icon" href="img/perfil.png" type="image/png">
-        <meta name="description" content="Página oficial de la comunidad de Glogloking — streamings, eventos y noticias. Sigue a Glogloking en Kick para no perder las transmisiones.">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ElGlogloking</title>
+        <link rel="icon" href="img/perfil.png" type="image/png">
+        <meta name="description"
+            content="Página oficial de la comunidad de Glogloking — streamings, eventos y noticias. Sigue a Glogloking en Kick para no perder las transmisiones.">
         <link rel="canonical" href="https://kick.com/elglogloking">
 
         <!-- Open Graph -->
         <meta property="og:locale" content="es_ES">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Glogloking — Streamer de Kick">
-        <meta property="og:description" content="Página oficial de la comunidad de Glogloking: alertas de transmisiones, eventos y contenido.">
+        <meta property="og:title" content="Glogloking — Streamer">
+        <meta property="og:description"
+            content="Página oficial de la comunidad de Glogloking: alertas de transmisiones, eventos y contenido.">
         <meta property="og:url" content="https://kick.com/elglogloking">
-        <meta property="og:image" content="https://your-domain.example/img/perfil.png">
+        <meta property="og:image"
+            content="img/perfil.png">
         <meta property="og:image:alt" content="Glogloking Profile">
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Glogloking — Streamer de Kick">
-        <meta name="twitter:description" content="Página oficial de la comunidad de Glogloking: alertas de transmisiones, eventos y contenido.">
-        <meta name="twitter:image" content="https://your-domain.example/img/perfil.png">
+        <meta name="twitter:title" content="Glogloking — Streamer">
+        <meta name="twitter:description"
+            content="Página oficial de la comunidad de Glogloking: alertas de transmisiones, eventos y contenido.">
+        <meta name="twitter:image"
+            content="img/perfil.png">
         <meta name="twitter:site" content="@elglogloking">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
         @keyframes float {
 
             0%,
@@ -416,115 +421,154 @@
             }
         }
     </style>
-</head>
+    </head>
 
-<body>
-    <!-- Video de fondo -->
-    <video autoplay muted loop playsinline class="video-background">
-        <source src="img/intro.mp4" type="video/mp4">
-    </video>
+    <body>
+        <!-- Video de fondo -->
+        <video autoplay muted loop playsinline class="video-background">
+            <source src="img/intro.mp4" type="video/mp4">
+        </video>
 
-    <!-- Capa de color animada encima del video -->
-    <div class="gradient-overlay"></div>
+        <!-- Capa de color animada encima del video -->
+        <div class="gradient-overlay"></div>
 
-    <!-- Contenedor principal -->
-    <div class="content-wrapper">
-        <!-- Card Container -->
-        <div class="bg-black rounded-3xl shadow-2xl w-full p-8 sm:p-6 md:p-8 animate-scaleIn">
+        <!-- Contenedor principal -->
+        <div class="content-wrapper">
+            <!-- Card Container -->
+            <div
+                class="bg-black rounded-3xl shadow-2xl w-full p-8 sm:p-6 md:p-8 animate-scaleIn">
 
-            <!-- Avatar Section -->
-            <div class="flex justify-center mb-4 sm:mb-6">
-                <div class="relative avatar-container">
-                    <!-- Red Circle Background with Animation -->
-                    <div
-                        class="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center animate-float animate-pulse-glow overflow-hidden">
-                        <!-- Profile Image -->
-                        <img src="img/perfil.png" alt="Glogloking Profile" class="profile-img">
+                <!-- Avatar Section -->
+                <div class="flex justify-center mb-4 sm:mb-6">
+                    <div class="relative avatar-container">
+                        <!-- Red Circle Background with Animation -->
+                        <div
+                            class="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center animate-float animate-pulse-glow overflow-hidden">
+                            <!-- Profile Image -->
+                            <img src="img/perfil.png" alt="Glogloking Profile"
+                                class="profile-img">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Title -->
-            <h1 class="text-white text-3xl sm:text-4xl font-bold text-center mb-2 animate-fadeInUp delay-100">
-                ElGlogloking
-            </h1>
+                <!-- Title -->
+                <h1
+                    class="text-white text-3xl sm:text-4xl font-bold text-center mb-2 animate-fadeInUp delay-100">
+                    ElGlogloking
+                </h1>
 
-            <!-- Stream Status Indicator -->
-            <div class="flex justify-center mb-4">
-                <div class="stream-status">
-                    <span class="status-dot" id="statusDot"></span>
-                    <span class="status-text text-gray-300" id="statusText">Verificando...</span>
+                <!-- Stream Status Indicator -->
+                <div class="flex justify-center mb-4">
+                    <div class="stream-status">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span class="status-text text-gray-300"
+                            id="statusText">Verificando...</span>
+                    </div>
                 </div>
+
+                <!-- Description -->
+                <p
+                    class="text-gray-300 text-center mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed animate-fadeInUp delay-200">
+                    Soy <strong
+                        class="text-white font-semibold">streamer</strong>,
+                    <strong class="text-white font-semibold">youtuber</strong> y
+                    <strong class="text-red-400">huérfano</strong>.
+                    Egresado de <strong class="text-red-400 font-bold">Ciencias
+                        del Fracaso</strong>.
+
+                    Prendo a las <strong class="text-white">6:00 p.m.</strong>
+                    <span class="text-gray-400 italic">(según yo)</span>, pero
+                    generalmente es <strong class="text-white">2 o 3 horas
+                        después</strong>.
+
+                    Hago <strong class="text-red-400">IRL</strong>, <strong
+                        class="text-red-400">setup</strong>, <strong
+                        class="text-red-400">podcast</strong>, <strong
+                        class="text-red-400">eventos</strong> y el <strong
+                        class="text-white">chow</strong> nunca falta, aunque
+                    paradójicamente <span class="text-gray-400 italic">nunca doy
+                        variedad</span>. </p>
+
+                <!-- Social Media Icons -->
+                <div
+                    class="flex flex-wrap justify-center gap-3 sm:gap-4 animate-fadeInUp delay-300">
+                    <a href="https://kick.com/elglogloking"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-2.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://www.instagram.com/gloglo_king/"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-3.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://www.tiktok.com/@gloglokingoficial"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-4.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://x.com/KingGloglo"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-5.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://www.youtube.com/@elglogloking"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-6.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="#"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-7.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://www.twitch.tv/elglogloking"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-8.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a
+                        href="https://whatsapp.com/channel/0029VaA3l5fA89MmwcrGq02d"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-9.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+                    <a href="https://kick.com/elglogloking"
+                        class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <img src="img/icons/svgexport-10.svg" alt="Social Icon"
+                            class="w-6 h-6">
+                    </a>
+
+                </div>
+
             </div>
+        </div>
 
-            <!-- Description -->
-            <p class="text-gray-300 text-center mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed animate-fadeInUp delay-200">
-Soy <strong class="text-white font-semibold">streamer</strong>, <strong class="text-white font-semibold">youtuber</strong> y <strong class="text-red-400">huérfano</strong>. 
-                Egresado de <strong class="text-red-400 font-bold">Ciencias del Fracaso</strong>. 
+        <!-- Control de música -->
+        <audio id="bgMusic" loop>
+            <source src="intro.mp3" type="audio/mpeg">
+        </audio>
 
-                Prendo a las <strong class="text-white">6:00 p.m.</strong> <span class="text-gray-400 italic">(según yo)</span>, pero generalmente es <strong class="text-white">2 o 3 horas después</strong>. 
-              
-                Hago <strong class="text-red-400">IRL</strong>, <strong class="text-red-400">setup</strong>, <strong class="text-red-400">podcast</strong>, <strong class="text-red-400">eventos</strong> y el <strong class="text-white">chow</strong> nunca falta, aunque paradójicamente <span class="text-gray-400 italic">nunca doy variedad</span>.            </p>
-
-            <!-- Social Media Icons -->
-            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 animate-fadeInUp delay-300">
-                <a href="https://kick.com/elglogloking" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-2.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://www.instagram.com/gloglo_king/" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-3.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://www.tiktok.com/@gloglokingoficial" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-4.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://x.com/KingGloglo" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-5.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://www.youtube.com/@elglogloking" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-6.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="#" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-7.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://www.twitch.tv/elglogloking" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-8.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://whatsapp.com/channel/0029VaA3l5fA89MmwcrGq02d" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-9.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-                <a href="https://kick.com/elglogloking" class="icon-btn bg-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                    <img src="img/icons/svgexport-10.svg" alt="Social Icon" class="w-6 h-6">
-                </a>
-
+        <div class="music-control">
+            <div class="volume-slider-container">
+                <svg class="volume-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                </svg>
+                <input type="range" class="volume-slider" id="volumeSlider"
+                    min="0" max="100" value="3">
             </div>
-
+            <button class="music-btn" id="musicToggle">
+                <svg id="playIcon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg id="pauseIcon" style="display: none;" viewBox="0 0 24 24">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+                </svg>
+            </button>
         </div>
-    </div>
 
-    <!-- Control de música -->
-    <audio id="bgMusic" loop>
-        <source src="intro.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="music-control">
-        <div class="volume-slider-container">
-            <svg class="volume-icon" viewBox="0 0 24 24">
-                <path
-                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-            </svg>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="3">
-        </div>
-        <button class="music-btn" id="musicToggle">
-            <svg id="playIcon" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-            </svg>
-            <svg id="pauseIcon" style="display: none;" viewBox="0 0 24 24">
-                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-            </svg>
-        </button>
-    </div>
-
-    <script>
+        <script>
         const bgMusic = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         const playIcon = document.getElementById('playIcon');
@@ -658,6 +702,6 @@ Soy <strong class="text-white font-semibold">streamer</strong>, <strong class="t
         setInterval(checkStreamStatus, 30000);
     </script>
 
-</body>
+    </body>
 
 </html>
