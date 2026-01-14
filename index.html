@@ -325,13 +325,67 @@
             fill: white;
             margin-right: 8px;
         }
+
+        /* Estilos para el indicador de estado del stream */
+        .stream-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 8px;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.25s;
+            opacity: 0;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #6b7280;
+            transition: all 0.3s ease;
+        }
+
+        .status-dot.live {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.8), 0 0 20px rgba(239, 68, 68, 0.4);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .status-dot.offline {
+            background: #6b7280;
+        }
+
+        .status-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Video de fondo -->
     <video autoplay muted loop playsinline class="video-background">
-        <source src="img/fondo.mp4" type="video/mp4">
+        <source src="img/intro.mp4" type="video/mp4">
     </video>
 
     <!-- Capa de color animada encima del video -->
@@ -355,9 +409,17 @@
             </div>
 
             <!-- Title -->
-            <h1 class="text-white text-4xl font-bold text-center mb-4 animate-fadeInUp delay-100">
+            <h1 class="text-white text-4xl font-bold text-center mb-2 animate-fadeInUp delay-100">
                 Glogloking
             </h1>
+
+            <!-- Stream Status Indicator -->
+            <div class="flex justify-center mb-4">
+                <div class="stream-status">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-text text-gray-300" id="statusText">Verificando...</span>
+                </div>
+            </div>
 
             <!-- Description -->
             <p class="text-gray-300 text-center mb-8 leading-relaxed animate-fadeInUp delay-200">
@@ -448,7 +510,7 @@
 
     <!-- Control de música -->
     <audio id="bgMusic" loop>
-        <source src="fondoc.mp3" type="audio/mpeg">
+        <source src="intro.mp3" type="audio/mpeg">
     </audio>
 
     <div class="music-control">
@@ -475,9 +537,20 @@
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
         const volumeSlider = document.getElementById('volumeSlider');
+        const videoBackground = document.querySelector('.video-background');
 
         // Establecer volumen inicial al 3%
         bgMusic.volume = 0.03;
+
+        // Función para iniciar música
+        function startMusic() {
+            bgMusic.play().then(() => {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }).catch(() => {
+                console.log('Autoplay bloqueado. Haz clic en el botón para reproducir.');
+            });
+        }
 
         // Toggle play/pause
         musicToggle.addEventListener('click', () => {
@@ -497,16 +570,99 @@
             bgMusic.volume = e.target.value / 100;
         });
 
-        // Intentar reproducir automáticamente (algunos navegadores lo bloquean)
-        document.addEventListener('DOMContentLoaded', () => {
-            bgMusic.play().then(() => {
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            }).catch(() => {
-                // Si falla el autoplay, el usuario tendrá que hacer clic
-                console.log('Autoplay bloqueado. Haz clic en el botón para reproducir.');
-            });
-        });
+        // Intentar reproducir automáticamente
+        startMusic();
+
+        // Reintentar reproducción al hacer clic en cualquier parte de la página
+        document.body.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                startMusic();
+            }
+        }, { once: true });
+
+        // Función para verificar el estado del stream en Kick
+        async function checkStreamStatus() {
+            const username = 'elglogloking'; // https://kick.com/elglogloking
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+
+            try {
+                // Usar proxy CORS para evitar bloqueos
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://kick.com/api/v2/channels/${username}`)}`);
+                const data = await response.json();
+                const kickData = JSON.parse(data.contents);
+
+                const isLive = kickData.livestream !== null;
+
+                if (isLive) {
+                    // Estado: EN VIVO
+                    statusDot.classList.add('live');
+                    statusDot.classList.remove('offline');
+                    statusText.textContent = 'EN VIVO';
+                    statusText.style.color = '#61CB2B';
+                    
+                    // Cambiar video a intro.mp4
+                    if (!videoBackground.src.includes('intro.mp4')) {
+                        videoBackground.src = 'img/intro.mp4';
+                    }
+                    
+                    // Cambiar música a intro
+                    if (!bgMusic.src.includes('intro.mp3')) {
+                        const wasPlaying = !bgMusic.paused;
+                        const currentTime = bgMusic.currentTime;
+                        bgMusic.src = 'intro.mp3';
+                        bgMusic.load();
+                        if (wasPlaying) {
+                            bgMusic.play().catch(() => {});
+                        }
+                    }
+                } else {
+                    // Estado: OFFLINE
+                    statusDot.classList.add('offline');
+                    statusDot.classList.remove('live');
+                    statusText.textContent = 'OFFLINE';
+                    statusText.style.color = '#9ca3af';
+                    
+                    // Cambiar video a ending.mp4
+                    if (!videoBackground.src.includes('ending.mp4')) {
+                        videoBackground.src = 'img/ending.mp4';
+                    }
+                    
+                    // Cambiar música a ending
+                    if (!bgMusic.src.includes('ending.mp3')) {
+                        const wasPlaying = !bgMusic.paused;
+                        bgMusic.src = 'ending.mp3';
+                        bgMusic.load();
+                        if (wasPlaying) {
+                            bgMusic.play().catch(() => {});
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al verificar el estado:', error);
+                statusText.textContent = 'Error';
+                statusText.style.color = '#f59e0b';
+                
+                // Si hay error, mantener intro
+                if (!videoBackground.src.includes('intro.mp4')) {
+                    videoBackground.src = 'img/intro.mp4';
+                }
+                
+                // Mantener música intro en caso de error
+                if (!bgMusic.src.includes('intro.mp3')) {
+                    const wasPlaying = !bgMusic.paused;
+                    bgMusic.src = 'intro.mp3';
+                    bgMusic.load();
+                    if (wasPlaying) {
+                        bgMusic.play().catch(() => {});
+                    }
+                }
+            }
+        }
+
+        // Verificar estado inmediatamente y cada 30 segundos
+        checkStreamStatus();
+        setInterval(checkStreamStatus, 30000);
     </script>
 
 </body>
